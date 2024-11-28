@@ -1,5 +1,5 @@
-import React from "react";
 import Store from "./components/Store.jsx";
+import "@mantine/core/styles.css";
 
 const App = () => {
   return (

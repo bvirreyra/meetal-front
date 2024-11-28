@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 const CategoriaCards = ({ categories, onSelectCategory }) => {
@@ -11,7 +10,7 @@ const CategoriaCards = ({ categories, onSelectCategory }) => {
           onClick={() => onSelectCategory(category.id)}
         >
           <img
-            src={`/path-to-images/${category.id}.jpg`}
+            src={`../assets/img/1.jpg`}
             alt={category.name}
             className="card-image"
           />

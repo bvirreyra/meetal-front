@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.14.3",
+    "@mantine/hooks": "^7.14.3",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
     "prop-types": "^15.8.1",
@@ -26,6 +28,9 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
+    "postcss": "^8.4.49",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
     "vite": "^6.0.0"
   }
 }

@@ -1,14 +1,16 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 const ListaProductos = ({ productos, onAddToCart }) => {
   return (
     <div className="product-list">
       {productos.map((productos) => (
-        <div key={productos.id} className="product-card">
+        <div
+          key={productos.id}
+          className="product-card"
+          onClick={() => onAddToCart(productos)}
+        >
           <h5>{productos.name}</h5>
-          <p>Price: ${productos.price}</p>
-          <button onClick={() => onAddToCart(productos)}>Add to Cart</button>
+          <p>Precio: Bs. {productos.price}</p>
         </div>
       ))}
     </div>

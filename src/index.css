@@ -1,12 +1,12 @@
 * {
   margin: 0;
-  background-color: indigo;
 }
 
 body .store {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: indigo;
 }
 
 .card,
