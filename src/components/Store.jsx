@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import Footer from "./footer"; // Add this line to import Footer component
 
 const Store = () => {
   const [categories, setCategories] = useState([]);
@@ -196,6 +197,8 @@ const Store = () => {
     setView("subcategories");
   };
 
+  const featuredProducts = []; // Define featuredProducts as an empty array or fetch the actual data
+
   return (
     <div className="store">
       {/* Navegación */}
@@ -260,6 +263,7 @@ const Store = () => {
 
       {/* Contenedor de toasts */}
       <ToastContainer />
+      <Footer featuredProducts={featuredProducts} />
     </div>
   );
 };
