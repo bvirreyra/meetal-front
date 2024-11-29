@@ -39,3 +39,20 @@ body .store {
   background: indigo;
   background-color: indigo;
 }
+
+.botonVaciar .botonPagar {
+  border: 2px solid #4caf50;
+  margin: 10px;
+}
+
+.product-card:hover {
+  color: indigo;
+}
+
+.product-card:hover p {
+  display: none;
+}
+
+.shopping-cart {
+  color: white;
+}

@@ -74,9 +74,16 @@ const ShoppingCart = ({ cartItems, onRemoveFromCart, onClearCart, onPay }) => {
                 <td>${item.price}</td>
                 <td>{item.quantity}</td>
                 <td>
-                  <button onClick={() => onRemoveFromCart(item.id)}>
+                  <Button
+                    className="botonVaciar"
+                    variant="filled"
+                    color="rgba(157, 102, 212, 1)"
+                    size="xs"
+                    radius="md"
+                    onClick={() => onRemoveFromCart(item.id)}
+                  >
                     Quitar
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -91,6 +98,7 @@ const ShoppingCart = ({ cartItems, onRemoveFromCart, onClearCart, onPay }) => {
       {total > 0 && (
         <div className="cart-actions">
           <Button
+            className="botonVaciar"
             variant="filled"
             color="rgba(157, 102, 212, 1)"
             size="xs"
@@ -100,6 +108,7 @@ const ShoppingCart = ({ cartItems, onRemoveFromCart, onClearCart, onPay }) => {
             Vaciar Carrito
           </Button>
           <Button
+            className="botonPagar"
             variant="filled"
             color="rgba(157, 102, 212, 1)"
             size="xs"
