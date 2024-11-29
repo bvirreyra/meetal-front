@@ -8,9 +8,9 @@ const CategoriaCards = ({ categories, onSelectCategory }) => {
           key={category.id}
           className="card"
           onClick={() => onSelectCategory(category.id)}
-        >
+        >  
           <img
-            src={`../assets/img/1.jpg`}
+            src={`/public/images/${category.id}.jpg`}
             alt={category.name}
             className="card-image"
           />

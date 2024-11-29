@@ -183,7 +183,7 @@ const Store = () => {
     );
 
     // Guardar el PDF
-    doc.save("Meetal_Invoice.pdf");
+    doc.save("Factura_cliente.pdf");
   };
 
   const navigateToCategories = () => {
