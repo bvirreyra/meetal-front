@@ -3,6 +3,10 @@ import CategoryCards from "./CategoriaCards";
 import SubCategoryCards from "./SubCategoriaCards";
 import ProductList from "./ListaProducto";
 import ShoppingCart from "./CarritoCompras";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const Store = () => {
   const [categories, setCategories] = useState([]);
@@ -11,6 +15,9 @@ const Store = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [cart, setCart] = useState([]);
+  const [view, setView] = useState("categories"); // Controla la vista actual
+  const [showForm, setShowForm] = useState(false); // Controla si se muestra el formulario de pago
+  const [clientData, setClientData] = useState(null); // Guardará los datos del cliente
 
   const fetchData = async (option, categoryId = null, subCategoryId = null) => {
     try {
@@ -27,8 +34,7 @@ const Store = () => {
         return null;
       }
       const result = await response.json();
-      console.log(`Datos obtenidos (${option}):`, result);
-      return result.data; // Usamos la propiedad 'data' del objeto devuelto
+      return result.data;
     } catch (error) {
       console.error("Error al realizar la solicitud:", error);
       return null;
@@ -55,8 +61,8 @@ const Store = () => {
   const handleSelectCategory = async (categoryId) => {
     setSelectedCategory(categoryId);
     setSelectedSubCategory(null);
+    setView("subcategories");
 
-    // Cargar las subcategorías cuando se seleccione una categoría
     const data = await fetchData("S", categoryId);
     if (data && Array.isArray(data)) {
       setSubCategories(
@@ -71,8 +77,8 @@ const Store = () => {
 
   const handleSelectSubCategory = async (subCategoryId) => {
     setSelectedSubCategory(subCategoryId);
+    setView("products");
 
-    // Cargar los productos cuando se seleccione una subcategoría
     const data = await fetchData("P", null, subCategoryId);
     if (data && Array.isArray(data)) {
       setProducts(
@@ -98,6 +104,8 @@ const Store = () => {
       }
       return [...prevCart, { ...product, quantity: 1 }];
     });
+
+    toast.success(`${product.name} añadido al carrito!`);
   };
 
   const removeFromCart = (productId) => {
@@ -108,37 +116,150 @@ const Store = () => {
     setCart([]);
   };
 
-  // Función para manejar el pago
-  const handlePay = () => {
-    console.log("Procesando el pago...");
-    // Lógica de pago (puedes integrar un API de pagos o cualquier otra lógica)
+  const handleConfirm = () => {
+    setShowForm(true); // Mostrar el formulario para que aparezca el botón de pago
+  };
+  const processPayment = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {
+      name: formData.get("name"),
+      nit: formData.get("nit"),
+    };
+    setClientData(data); // Guardamos los datos del cliente
+    console.log("DATOS DEL CLIENTE", data);
+
+    // Generar PDF después de procesar el pago
+    generatePDF(data, cart);
+
     setCart([]); // Limpiar el carrito después del pago
+    setShowForm(false); // Ocultar el formulario
+    setView("categories"); // Volver a la vista de categorías
     alert("Pago realizado con éxito");
+  };
+
+  const generatePDF = (clientData, cartItems) => {
+    const doc = new jsPDF();
+
+    // Título
+    doc.setFontSize(18);
+    doc.text("Meetal SuperMercado", 14, 20);
+
+    // Datos del cliente
+    doc.setFontSize(12);
+    doc.text(`Cliente: ${clientData.name}`, 14, 30);
+    doc.text(`NIT: ${clientData.nit}`, 14, 36);
+
+    // Información de la venta
+    doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 42);
+    doc.text(`Hora: ${new Date().toLocaleTimeString()}`, 14, 48);
+
+    // Configurar Tabla
+    const tableData = cartItems.map((item, index) => [
+      index + 1,
+      item.name,
+      item.quantity,
+      `${item.price.toFixed(2)}`,
+      `${(item.price * item.quantity).toFixed(2)}`,
+    ]);
+
+    doc.autoTable({
+      head: [["#", "Producto", "Cantidad", "Precio Bs.", "Subtotal Bs."]],
+      body: tableData,
+      startY: 60,
+    });
+
+    // Total
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    doc.setFontSize(14);
+    doc.text(
+      `Total: Bs. ${total.toFixed(2)}`,
+      14,
+      doc.lastAutoTable.finalY + 10
+    );
+
+    // Guardar el PDF
+    doc.save("Meetal_Invoice.pdf");
+  };
+
+  const navigateToCategories = () => {
+    setSelectedCategory(null);
+    setSelectedSubCategory(null);
+    setView("categories");
+  };
+
+  const navigateToSubCategories = () => {
+    setSelectedSubCategory(null);
+    setView("subcategories");
   };
 
   return (
     <div className="store">
-      {!selectedCategory && (
+      {/* Navegación */}
+      <nav className="nav-bar">
+        <img src="/images/nav-background.jpg" alt="Fondo del nav" width={100} />
+        <div className="nav-content">
+          {view !== "categories" && (
+            <button onClick={navigateToCategories}>Categorías</button>
+          )}
+          {view === "products" && (
+            <button onClick={navigateToSubCategories}>Subcategorías</button>
+          )}
+          <div className="cart-icon" onClick={() => setView("cart")}>
+            <img src="/images/cart-icon.png" alt="Carrito" />
+            <span className="cart-count">
+              {cart.reduce((ac, el) => ac + Number(el.quantity), 0)}
+            </span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Contenido dinámico basado en la vista */}
+      {view === "categories" && (
         <CategoryCards
           categories={categories}
           onSelectCategory={handleSelectCategory}
         />
       )}
-      {selectedCategory && !selectedSubCategory && (
+      {view === "subcategories" && (
         <SubCategoryCards
           subCategorias={subCategories}
           onSelectSubCategory={handleSelectSubCategory}
         />
       )}
-      {selectedSubCategory && (
+      {view === "products" && (
         <ProductList productos={products} onAddToCart={addToCart} />
       )}
-      <ShoppingCart
-        cartItems={cart}
-        onRemoveFromCart={removeFromCart}
-        onClearCart={clearCart}
-        onPay={handlePay}
-      />
+      {view === "cart" && (
+        <ShoppingCart
+          cartItems={cart}
+          onRemoveFromCart={removeFromCart}
+          onClearCart={clearCart}
+          onPay={handleConfirm} // Solo muestra Confirmar, no Realizar Pago
+        />
+      )}
+
+      {/* Formulario de pago */}
+      {showForm && (
+        <form onSubmit={processPayment} className="payment-form">
+          <h2>Datos del cliente</h2>
+          <label>
+            Nombre:
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Carnet o NIT:
+            <input type="text" name="nit" required />
+          </label>
+          <button type="submit">Realizar pago</button>
+        </form>
+      )}
+
+      {/* Contenedor de toasts */}
+      <ToastContainer />
     </div>
   );
 };

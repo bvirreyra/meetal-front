@@ -1,7 +1,144 @@
+// import PropTypes from "prop-types";
+// import jsPDF from "jspdf";
+// import "jspdf-autotable";
+// import { Button } from "@mantine/core";
+// const ShoppingCart = ({ cartItems, onRemoveFromCart, onClearCart, onPay }) => {
+//   const total = cartItems.reduce(
+//     (acc, item) => acc + item.price * item.quantity,
+//     0
+//   );
+
+//   const handlePay = () => {
+//     // Aquí podrías hacer una llamada al backend para procesar el pago.
+//     onPay();
+//   };
+
+//   const generatePDF = (cartItems) => {
+//     const doc = new jsPDF();
+
+//     // Título
+//     doc.setFontSize(18);
+//     doc.text("Meetal SuperMercado", 14, 20);
+
+//     // Información General
+//     doc.setFontSize(12);
+//     doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 30);
+//     doc.text(`Time: ${new Date().toLocaleTimeString()}`, 14, 36);
+
+//     // Configurar Tabla
+//     const tableData = cartItems.map((item, index) => [
+//       index + 1,
+//       item.name,
+//       item.quantity,
+//       `$${item.price.toFixed(2)}`,
+//       `$${(item.price * item.quantity).toFixed(2)}`,
+//     ]);
+
+//     doc.autoTable({
+//       head: [["#", "Producto", "Cantidad", "Precio", "Subtotal"]],
+//       body: tableData,
+//       startY: 50,
+//     });
+
+//     // Total
+//     const total = cartItems.reduce(
+//       (sum, item) => sum + item.price * item.quantity,
+//       0
+//     );
+//     doc.setFontSize(14);
+//     doc.text(`Total: $${total.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 10);
+
+//     // Guardar el PDF
+//     doc.save("Meetal-Factura.pdf");
+//   };
+
+//   return (
+//     <div className="shopping-cart">
+//       <h2>Carrito de Compras</h2>
+//       {cartItems.length === 0 ? (
+//         <p>El carrito está vacío.</p>
+//       ) : (
+//         <table>
+//           <thead>
+//             <tr>
+//               <th>Producto</th>
+//               <th>Precio</th>
+//               <th>Cantidad</th>
+//               <th>Acción</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {cartItems.map((item) => (
+//               <tr key={item.id}>
+//                 <td>{item.name}</td>
+//                 <td>${item.price}</td>
+//                 <td>{item.quantity}</td>
+//                 <td>
+//                   <Button
+//                     className="botonVaciar"
+//                     variant="filled"
+//                     color="rgba(157, 102, 212, 1)"
+//                     size="xs"
+//                     radius="md"
+//                     onClick={() => onRemoveFromCart(item.id)}
+//                   >
+//                     Quitar
+//                   </Button>
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       )}
+//       <div className="total">
+//         <p>
+//           <strong>Total: Bs. {total.toFixed(2)}</strong>
+//         </p>
+//       </div>
+//       {total > 0 && (
+//         <div className="cart-actions">
+//           <Button
+//             className="botonVaciar"
+//             variant="filled"
+//             color="rgba(157, 102, 212, 1)"
+//             size="xs"
+//             radius="md"
+//             onClick={onClearCart}
+//           >
+//             Vaciar Carrito
+//           </Button>
+//           <Button
+//             className="botonPagar"
+//             variant="filled"
+//             color="rgba(157, 102, 212, 1)"
+//             size="xs"
+//             radius="md"
+//             onClick={() => {
+//               handlePay();
+//               generatePDF(cartItems);
+//             }}
+//           >
+//             Realizar Pago
+//           </Button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// ShoppingCart.propTypes = {
+//   cartItems: PropTypes.array.isRequired,
+//   onRemoveFromCart: PropTypes.func.isRequired,
+//   onClearCart: PropTypes.func.isRequired,
+//   onPay: PropTypes.func.isRequired,
+// };
+// export default ShoppingCart;
+
 import PropTypes from "prop-types";
-import jsPDF from "jspdf";
+// import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Button } from "@mantine/core";
+
 const ShoppingCart = ({ cartItems, onRemoveFromCart, onClearCart, onPay }) => {
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -9,118 +146,74 @@ const ShoppingCart = ({ cartItems, onRemoveFromCart, onClearCart, onPay }) => {
   );
 
   const handlePay = () => {
-    // Aquí podrías hacer una llamada al backend para procesar el pago.
-    onPay();
+    // Aquí puedes hacer una llamada al backend para procesar el pago.
+    onPay(); // Llama la función para mostrar el formulario de pago
   };
 
-  const generatePDF = (cartItems) => {
-    const doc = new jsPDF();
+  //   const generatePDF = (cartItems) => {
+  //     const doc = new jsPDF();
 
-    // Título
-    doc.setFontSize(18);
-    doc.text("Meetal SuperMercado", 14, 20);
+  //     // Título
+  //     doc.setFontSize(18);
+  //     doc.text("Meetal SuperMercado", 14, 20);
 
-    // Información General
-    doc.setFontSize(12);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 30);
-    doc.text(`Time: ${new Date().toLocaleTimeString()}`, 14, 36);
+  //     // Información General
+  //     doc.setFontSize(12);
+  //     doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 30);
+  //     doc.text(`Time: ${new Date().toLocaleTimeString()}`, 14, 36);
 
-    // Configurar Tabla
-    const tableData = cartItems.map((item, index) => [
-      index + 1,
-      item.name,
-      item.quantity,
-      `$${item.price.toFixed(2)}`,
-      `$${(item.price * item.quantity).toFixed(2)}`,
-    ]);
+  //     // Configurar Tabla
+  //     const tableData = cartItems.map((item, index) => [
+  //       index + 1,
+  //       item.name,
+  //       item.quantity,
+  //       `$${item.price.toFixed(2)}`,
+  //       `$${(item.price * item.quantity).toFixed(2)}`,
+  //     ]);
 
-    doc.autoTable({
-      head: [["#", "Producto", "Cantidad", "Precio", "Subtotal"]],
-      body: tableData,
-      startY: 50,
-    });
+  //     doc.autoTable({
+  //       head: [["#", "Producto", "Cantidad", "Precio", "Subtotal"]],
+  //       body: tableData,
+  //       startY: 50,
+  //     });
 
-    // Total
-    const total = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    doc.setFontSize(14);
-    doc.text(`Total: $${total.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 10);
+  //     // Total
+  //     const total = cartItems.reduce(
+  //       (sum, item) => sum + item.price * item.quantity,
+  //       0
+  //     );
+  //     doc.setFontSize(14);
+  //     doc.text(`Total: $${total.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 10);
 
-    // Guardar el PDF
-    doc.save("Meetal-Factura.pdf");
-  };
+  //     // Guardar el PDF
+  //     doc.save("Meetal_Invoice.pdf");
+  //   };
 
   return (
     <div className="shopping-cart">
       <h2>Carrito de Compras</h2>
-      {cartItems.length === 0 ? (
-        <p>El carrito está vacío.</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
+      {cartItems.length > 0 ? (
+        <div>
+          <ul>
             {cartItems.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>${item.price}</td>
-                <td>{item.quantity}</td>
-                <td>
-                  <Button
-                    className="botonVaciar"
-                    variant="filled"
-                    color="rgba(157, 102, 212, 1)"
-                    size="xs"
-                    radius="md"
-                    onClick={() => onRemoveFromCart(item.id)}
-                  >
-                    Quitar
-                  </Button>
-                </td>
-              </tr>
+              <li key={item.id}>
+                <span>{item.name}</span> - ${item.price} x {item.quantity}
+                <button onClick={() => onRemoveFromCart(item.id)}>
+                  Eliminar
+                </button>
+              </li>
             ))}
-          </tbody>
-        </table>
-      )}
-      <div className="total">
-        <p>
-          <strong>Total: Bs. {total.toFixed(2)}</strong>
-        </p>
-      </div>
-      {total > 0 && (
-        <div className="cart-actions">
-          <Button
-            className="botonVaciar"
-            variant="filled"
-            color="rgba(157, 102, 212, 1)"
-            size="xs"
-            radius="md"
-            onClick={onClearCart}
-          >
-            Vaciar Carrito
-          </Button>
-          <Button
-            className="botonPagar"
-            variant="filled"
-            color="rgba(157, 102, 212, 1)"
-            size="xs"
-            radius="md"
-            onClick={() => {
-              handlePay();
-              generatePDF(cartItems);
-            }}
-          >
-            Realizar Pago
-          </Button>
+          </ul>
+          <div className="cart-total">
+            <span>Total: ${total.toFixed(2)}</span>
+          </div>
+          <div className="cart-actions">
+            <Button onClick={handlePay}>Confirmar</Button>
+            <Button onClick={onClearCart}>Limpiar</Button>
+          </div>
         </div>
+      ) : (
+        <p>No tienes productos en el carrito.</p>
       )}
     </div>
   );
@@ -132,4 +225,5 @@ ShoppingCart.propTypes = {
   onClearCart: PropTypes.func.isRequired,
   onPay: PropTypes.func.isRequired,
 };
+
 export default ShoppingCart;

@@ -4,7 +4,6 @@ import "@mantine/core/styles.css";
 const App = () => {
   return (
     <div>
-      <h1>MEETAL MARKET</h1>
       <Store />
     </div>
   );
