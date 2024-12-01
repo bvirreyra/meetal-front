@@ -9,7 +9,12 @@ const SubCategoriaCards = ({ subCategorias = [], onSelectSubCategory }) => {
           className="card"
           onClick={() => onSelectSubCategory(subCategory.id)}
         >
-          <h4>{subCategory.name}</h4>
+          <img
+            src={`/public/images/${subCategory.id}.jpg`}
+            alt={subCategory.name}
+            className="card-image"
+          />
+          <h3>{subCategory.name}</h3>
         </div>
       ))}
     </div>

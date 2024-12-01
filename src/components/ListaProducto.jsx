@@ -4,12 +4,19 @@ const ListaProductos = ({ productos, onAddToCart }) => {
   return (
     <div className="product-list">
       {productos.map((productos) => (
+        console.log("PRODICTO",productos.id),
+        
         <div
           key={productos.id}
           className="product-card"
           onClick={() => onAddToCart(productos)}
         >
-          <h5>{productos.name}</h5>
+          <img
+            src={`/public/images/${productos.id}.jpg`}
+            alt={productos.name}
+            className="cards-image"
+          />
+          <h3>{productos.name}</h3>
           <p>Precio: Bs. {productos.price}</p>
         </div>
       ))}

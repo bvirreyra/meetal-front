@@ -14,7 +14,7 @@ const CategoriaCards = ({ categories, onSelectCategory }) => {
             alt={category.name}
             className="card-image"
           />
-          <h3>{category.name}</h3>
+          <h2>{category.name}</h2>
         </div>
       ))}
     </div>

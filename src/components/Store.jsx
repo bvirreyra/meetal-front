@@ -200,11 +200,13 @@ const Store = () => {
   const featuredProducts = []; // Define featuredProducts as an empty array or fetch the actual data
 
   return (
-    <div className="store">
+    <div className="store"> 
       {/* Navegación */}
       <nav className="nav-bar">
-        <img src="/images/nav-background.jpg" alt="Fondo del nav" width={100} />
+      <h1 className="nav-name">Meetal Super Mercado</h1>
+        
         <div className="nav-content">
+        {/* <img src="/public/images/nav-background.jpg" alt="Fondo del nav"/> */}
           {view !== "categories" && (
             <button onClick={navigateToCategories}>Categorías</button>
           )}
