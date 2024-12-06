@@ -120,6 +120,8 @@ const Store = () => {
   const handleConfirm = () => {
     setShowForm(true); // Mostrar el formulario para que aparezca el botón de pago
   };
+
+
   const processPayment = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -129,6 +131,8 @@ const Store = () => {
     };
     setClientData(data); // Guardamos los datos del cliente
     console.log("DATOS DEL CLIENTE", data);
+    console.log("CARRITO", cart);
+    
 
     // Generar PDF después de procesar el pago
     generatePDF(data, cart);
@@ -138,6 +142,8 @@ const Store = () => {
     setView("categories"); // Volver a la vista de categorías
     alert("Pago realizado con éxito");
   };
+
+
 
   const generatePDF = (clientData, cartItems) => {
     const doc = new jsPDF();
