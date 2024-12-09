@@ -27,21 +27,6 @@ const Footer = ({ featuredProducts }) => {
           <p>Teléfono: +591 123 456 789</p>
           <p>Horario: Lunes a Domingo, 8:00 AM - 9:00 PM</p>
         </div>
-
-        <div className="social-links">
-          <h3>Síguenos</h3>
-          <div className="social-icons">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer">
-              <img src="/images/facebook-icon.png" alt="Facebook" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              <img src="/images/instagram-icon.png" alt="Instagram" />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer">
-              <img src="/images/twitter-icon.png" alt="Twitter" />
-            </a>
-          </div>
-        </div>
       </div>
 
       <div className="footer-bottom">

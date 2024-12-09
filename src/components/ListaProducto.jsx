@@ -12,12 +12,14 @@ const ListaProductos = ({ productos, onAddToCart }) => {
           onClick={() => onAddToCart(productos)}
         >
           <img
-            src={`/public/images/${productos.id}.jpg`}
+            src={`/public/images/productos/${productos.id}.jpg`}
             alt={productos.name}
             className="cards-image"
           />
-          <h3>{productos.name}</h3>
-          <p>Precio: Bs. {productos.price}</p>
+          <div className="product-info">
+              <h3>{productos.name}</h3>
+              <p>Precio: Bs. {productos.price}</p>
+          </div>
         </div>
       ))}
     </div>

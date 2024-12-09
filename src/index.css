@@ -116,7 +116,7 @@ body .store {
 .nav-bar {
   width: 100vw;
   height: 80px;
-  position: relative;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 10px;
@@ -204,7 +204,83 @@ button:hover {
 display: flex;
 }
 
+.product-info {
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos estén en columnas */
+}
+
+h3, p {
+  margin: 0; /* Evita márgenes inesperados */
+}
+
+.product-card:hover>.product-info {
+transform: translateX(-205px);
+  color:indigo;
+  transition: all 0.5s ease-out;
+}
 .nav .img{
   width: 40px;
   height: 40px; 
+}
+
+/* FILE: components/Footer.css */
+.store-footer {
+  background-color: #2c3e50; /* Fondo oscuro */
+  color: #ecf0f1; /* Texto claro para buena legibilidad */
+  padding: 20px;
+  border-top: 1px solid #34495e;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.featured-products, .store-info {
+  flex: 1;
+  margin: 10px;
+}
+
+.featured-products h3, .store-info h3 {
+  color: #ecf0f1;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  margin: 10px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-name {
+  font-weight: bold;
+  color: #ecf0f1;
+}
+
+.product-price {
+  color: #1abc9c;
+}
+
+.store-info p {
+  margin: 5px 0;
+  color: #bdc3c7;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  color: #bdc3c7;
 }
