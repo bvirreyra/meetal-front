@@ -203,8 +203,6 @@ const Store = () => {
     setView("subcategories");
   };
 
-  //const featuredProducts = []; // Define featuredProducts as an empty array or fetch the actual data
-
   return (
     <div className="store"> 
       {/* Navegación */}
