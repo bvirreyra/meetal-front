@@ -8,6 +8,7 @@ body .store {
   flex-direction: column;
   align-items: center;
   background-color: indigo;
+  margin-top: 0px;
 }
 
 .store {
@@ -91,6 +92,7 @@ body .store {
 .product-list,
 .category-cards,
 .subcategory-cards {
+  margin-top: 90px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -114,6 +116,7 @@ body .store {
 /* CSS PARA NAV */
 
 .nav-bar {
+  margin-top: 0px;
   width: 100vw;
   height: 80px;
   position: fixed;
@@ -225,7 +228,7 @@ transform: translateX(-205px);
 
 /* FILE: components/Footer.css */
 .store-footer {
-  background-color: #2c3e50; /* Fondo oscuro */
+  background-color: #0a0113; /* Fondo oscuro */
   color: #ecf0f1; /* Texto claro para buena legibilidad */
   padding: 20px;
   border-top: 1px solid #34495e;

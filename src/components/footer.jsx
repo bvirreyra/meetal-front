@@ -1,30 +1,12 @@
 import PropTypes from "prop-types";
-
-const Footer = ({ featuredProducts }) => {
+const Footer = () => {
   return (
     <footer className="store-footer">
       <div className="footer-content">
-        <div className="featured-products">
-          <h3>Productos destacados</h3>
-          <div className="product-list">
-            {featuredProducts.map((product) => (
-              <div key={product.id} className="product-item">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-image"
-                />
-                <p className="product-name">{product.name}</p>
-                <p className="product-price">Bs. {product.price.toFixed(2)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="store-info">
           <h3>Sobre Meetal SuperMercado</h3>
-          <p>Dirección: Calle Falsa 123, Ciudad Central</p>
-          <p>Teléfono: +591 123 456 789</p>
+          <p>Dirección: Av. Mariscal Santa Cruz, Zona Central</p>
+          <p>Teléfono: +591 62450170</p>
           <p>Horario: Lunes a Domingo, 8:00 AM - 9:00 PM</p>
         </div>
       </div>

@@ -6,8 +6,7 @@ import ShoppingCart from "./CarritoCompras";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
-import Footer from "./footer"; // Add this line to import Footer component
+import "jspdf-autotable";// Add this line to import Footer component
 
 const Store = () => {
   const [categories, setCategories] = useState([]);
